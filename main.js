@@ -1,26 +1,28 @@
-/* Definido as constantes do personagem do jogo(chamando pelas classes das divs no HTML) */
+/* definido as constantes do personagem do jogo(chamando pelas classes das divs no HTML) */
 const character = document.getElementsByClassName("character")[0];
 const containerCharacter = document.getElementsByClassName("container-character")[0];
 
-/* Definindo a constante da velocidade de deslocamento do personagem */
+/* definindo a constante da velocidade de deslocamento do personagem */
 const VELOCITY = 10;
 
-const SCREEN_WIDTH = screen.width;  /* Constante da largura da tela */
-const SCREEN_HEIGHT = screen.height;  /* Constante da altura da tela */
+const SCREEN_WIDTH = screen.width;  /* constante da largura da tela */
+const SCREEN_HEIGHT = screen.height;  /* constante da altura da tela */
 
-let num = screen.width - 110 /* Largura máxima permitida para o descolamento do personagem */
-let num_h = screen.height - 180 /* Altura máxima permitida para o deslocamento do personagem */
+let num = screen.width - 110 /* largura máxima permitida para o descolamento do personagem */
+let num_h = screen.height - 180 /* altura máxima permitida para o deslocamento do personagem */
 
-/* Posição inicial do personagem: */
+/* posição inicial do personagem: */
 let xPosition = 500;
 let yPosition = 300;
 
-const keysAvaiable = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"] /* Definindo quais teclas terão funções no jogo */
-const directions = ["turnUp", "turnLeft", "turnRight", "turnDown"]; /* Direções que o personagem vai poder seguir */
+const keysAvaiable = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"] /* definindo quais teclas terão funções no jogo */
+const directions = ["turnUp", "turnLeft", "turnRight", "turnDown"]; /* direções que o personagem vai poder seguir */
 
+/* permite adicionar manipulador de eventos => */
 window.addEventListener("keydown", (event) => {
     const key  = event.key;
 
+    /* atribuindo à currentKey o valor de key(evento) se uma key disponível for teclada */
     const keyPressedAvaiable =  keysAvaiable.some((currentKey) => {
         return currentKey === key;
     })
@@ -31,7 +33,7 @@ window.addEventListener("keydown", (event) => {
         if(character.classList.contains(direction)) character.classList.remove(direction);
     })
 
-
+    /* determinando as condições para poder realizar movimentos (esquerda, direita, cima , baixo) */
     if(key === "ArrowUp" && yPosition >= 0){
         character.classList.add("turnUp");
         yPosition -= VELOCITY;
@@ -51,7 +53,8 @@ window.addEventListener("keydown", (event) => {
         character.classList.add("turnRight");
         xPosition += VELOCITY;
     }
-
+    
+    /* determinando a posição do topo e do lado esquerdo do elemento, quando este está posicionado/parado */
     containerCharacter.style.top = `${yPosition}px`;
     containerCharacter.style.left = `${xPosition}px`
 });
